@@ -45,13 +45,32 @@
 				$("#td_img").css("height","400px");
 				td_img = 0;
 			}
-		})
+		});
+		
+		$("#reply_btn").on("click", function(){
+			if($("textarea[name='reply_content']").val().length ==0){
+				alert("댓글 내용을 입력해주세요");
+			}else{
+				var replyData = $("#reply_frm").serialize();
+				$.ajax({
+					type: "post",
+					url: "board_reply_write",
+					data: replyData,
+					success: function(){
+						alert("댓글을 작성하였습니다");
+						location.reload();
+					},
+					error: function(){
+						alert("오류발생");
+					}
+				});
+			}
+		});
 	});
 </script>
 </head>
 <body>
 	<div id="board_content">
-		<form method="post" action="#">
 			<table id="board_tb">
 				<tr>
 					<td width="20%">작성자</td>
@@ -91,17 +110,30 @@
 						<input type="button" onclick="location='board_comm'"value="목록">
 					</td>
 				</tr>
+				<c:forEach items="${reply}" var="reply">
+					<tr>
+						<td>
+							${reply.reply_id}<br>
+							${reply.reply_date}
+						</td>
+						<td>
+							${reply.reply_content}
+						</td>
+					</tr>
+				</c:forEach>
 				<c:if test="${not empty content.user_id}">
 				<tr>
 					<td colspan="2">
-						<input type="hidden" name="reply_id" value="${user_id}">
-						<textarea name="reply_content"></textarea><br>
-						<input type="button" name="reply_btn" value="댓글달기">
+						<form method="post" id="reply_frm" action="board_reply_write">
+								<input type="hidden" name="comm_key" value="${content.comm_key}">
+								<input type="hidden" name="reply_id" value="${user_id}">
+								<textarea name="reply_content"></textarea><br>
+								<button type="button" id="reply_btn">댓글달기</button>
+						</form>
 					</td>
 				</tr>
 				</c:if>
 			</table>
-		</form>
 	</div>
 </body>
 </html>

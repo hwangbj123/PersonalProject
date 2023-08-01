@@ -93,4 +93,31 @@
 		from board_comm
 		where COMM_KEY = #{comm_key}
     </select>
+    
+    <insert id="insertBoardReply" parameterType="hashmap">
+	    insert into board_reply(
+		    			COMM_KEY
+		    			,REPLY_KEY
+		    			,REPLY_ID
+		    			,REPLY_CONTENT
+		    			,REPLY_DATE
+		    )
+		    values(
+					    #{comm_key}
+					    ,(select nvl(max(REPLY_KEY+1),1) from board_reply where COMM_KEY=#{comm_key})
+						,#{reply_id}
+						,#{reply_content}
+						,sysdate
+			)
+    </insert>
+    <select id="selectBoardReply" parameterType="int" resultType="com.boot.dto.BoardReplyVO">
+	   	select 
+	   		COMM_KEY
+	   		,REPLY_KEY
+			,REPLY_ID
+			,REPLY_CONTENT
+			,to_char(REPLY_DATE, 'YY.MM.DD hh24:mm') REPLY_DATE
+		from board_reply
+		where comm_key = #{comm_key}
+    </select>
 </mapper>

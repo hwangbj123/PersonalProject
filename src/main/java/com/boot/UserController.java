@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.boot.dto.BoardCommVO;
+import com.boot.dto.BoardReplyVO;
 import com.boot.dto.BoardSellVO;
 import com.boot.dto.UserVO;
 import com.boot.service.BoardService;
@@ -211,7 +212,17 @@ public class UserController {
 		BoardCommVO vo = boardService.selectBoardCommContent(comm_key);
 		model.addAttribute("content", vo);
 		
+		ArrayList<BoardReplyVO> reply = boardService.selectBoardReply(comm_key);
+		model.addAttribute("reply", reply);
+		
 		return "board_comm_content";
+	}
+	
+	@RequestMapping(value="/board_reply_write")
+	@ResponseBody
+	public void board_reply_write(@RequestParam HashMap<String, String> param) {
+		log.info("@# board_reply_write param : "+param);
+		boardService.insertBoardReply(param);
 	}
 }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.boot.dto.BoardCommVO;
+import com.boot.dto.BoardReplyVO;
 import com.boot.dto.BoardSellVO;
 
 public interface BoardService {
@@ -13,4 +14,6 @@ public interface BoardService {
 	public void insertBoardComm(HashMap<String, String> param);
 	public ArrayList<BoardCommVO> selectBoardComm();
 	public BoardCommVO selectBoardCommContent(int comm_key);
+	public void insertBoardReply(HashMap<String, String> param);
+	public ArrayList<BoardReplyVO> selectBoardReply(int comm_key);
 }

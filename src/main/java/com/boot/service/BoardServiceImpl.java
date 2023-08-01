@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.boot.dao.BoardDAO;
 import com.boot.dto.BoardCommVO;
+import com.boot.dto.BoardReplyVO;
 import com.boot.dto.BoardSellVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardCommVO selectBoardCommContent(int comm_key) {
 		return boardDAO.selectBoardCommContent(comm_key);
+	}
+	
+	@Override
+	public void insertBoardReply(HashMap<String, String> param) {
+		log.info("@# insertBoardReply");
+		boardDAO.insertBoardReply(param);
+	}
+	@Override
+	public ArrayList<BoardReplyVO> selectBoardReply(int comm_key){
+		return boardDAO.selectBoardReply(comm_key);
 	}
 }
 
