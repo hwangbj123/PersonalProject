@@ -1,0 +1,96 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.dao.BoardDAO">
+	<insert id="insertBoard" parameterType="hashmap">
+		insert into board_sell(
+	    			BOARD_KEY
+	    			,USER_ID
+	    			,BOARD_TITLE
+	    			,BOARD_CONTENT
+	    			,BOARD_PRICE
+	    			,BOARD_IMG
+	    			,BOARD_DATE
+	    			,BOARD_RES
+	    )
+	    values(
+				    (select nvl(max(board_key+1),1) from board_sell)
+				 	,#{user_id}
+					,#{board_title}
+					,#{board_content}
+					,#{board_price}
+					,#{board_img}
+					,sysdate
+					,0
+		)
+    </insert>
+    <select id="selectBoard" resultType="com.boot.dto.BoardSellVO">
+    	select 
+    		BOARD_KEY
+			,USER_ID
+			,BOARD_TITLE
+			,BOARD_CONTENT
+			,BOARD_PRICE
+			,BOARD_IMG
+			,to_char(BOARD_DATE, 'YY.MM.DD hh24:mm') board_date
+			,BOARD_RES
+		from board_sell
+		order by board_key desc
+    </select>
+    <select id="selectBoardContent" parameterType="int" resultType="com.boot.dto.BoardSellVO">
+    	select 
+    		BOARD_KEY
+			,USER_ID
+			,BOARD_TITLE
+			,BOARD_CONTENT
+			,BOARD_PRICE
+			,BOARD_IMG
+			,to_char(BOARD_DATE, 'YY.MM.DD hh24:mm') board_date
+			,BOARD_RES
+		from board_sell
+		where board_key = #{board_key}
+    </select>
+    <insert id="insertBoardComm" parameterType="hashmap">
+	    insert into board_comm(
+		    			COMM_KEY
+		    			,USER_ID
+		    			,COMM_TITLE
+		    			,COMM_CONTENT
+		    			,COMM_IMG
+		    			,COMM_DATE
+		    )
+		    values(
+					    (select nvl(max(comm_key+1),1) from board_comm)
+					 	,#{user_id}
+						,#{comm_title}
+						,#{comm_content}
+						,#{comm_img}
+						,sysdate
+			)
+    </insert>
+    <select id="selectBoardComm" resultType="com.boot.dto.BoardCommVO">
+	   	select 
+	   		COMM_KEY
+			,USER_ID
+			,COMM_TITLE
+			,COMM_CONTENT
+			,COMM_IMG
+			,to_char(COMM_DATE, 'YY.MM.DD hh24:mm') COMM_DATE
+		from board_comm
+		order by comm_key desc
+    </select>
+    <select id="selectBoardCommContent" parameterType="int" resultType="com.boot.dto.BoardCommVO">
+    	select 
+    		COMM_KEY
+			,USER_ID
+			,COMM_TITLE
+			,COMM_CONTENT
+			,COMM_IMG
+			,to_char(COMM_DATE, 'YY.MM.DD hh24:mm') COMM_DATE
+			,COMM_GOOD
+			,COMM_BAD
+		from board_comm
+		where COMM_KEY = #{comm_key}
+    </select>
+</mapper>
