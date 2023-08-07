@@ -135,7 +135,7 @@
 							${reply.reply_id}<br>
 							${reply.reply_date}
 						</td>
-						<td>
+						<td style="text-align: left; padding: 10px;">
 							${reply.reply_content}<br>
 						</td>
 					</tr>

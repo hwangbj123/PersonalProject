@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.boot.dto.BoardCommVO;
+import com.boot.dto.BoardRecipesVO;
 import com.boot.dto.BoardReplyVO;
-import com.boot.dto.BoardSellVO;
 import com.boot.dto.UserVO;
 import com.boot.service.BoardService;
 import com.boot.service.UserService;
@@ -105,40 +105,41 @@ public class UserController {
 		log.info("@# nav");
 		return "include/nav";
 	}
-// board sell ----------------------------------------------
-	@RequestMapping(value = "/board_sell")
-	public String board_sell(Model model) {
-		log.info("@# board_sell");
+// board rcp ----------------------------------------------
+	@RequestMapping(value = "/board_rcp")
+	public String board_rcp(Model model) {
+		log.info("@# board_rcp");
 		
-		ArrayList<BoardSellVO> list = boardService.selectBoard();
+		ArrayList<BoardRecipesVO> list = boardService.selectBoard();
 		
 		model.addAttribute("list", list);
-		log.info("@# board_sell list : "+list);
-		return "board_sell";
+		log.info("@# board_rcp list : "+list);
+		return "board_rcp";
 	}
-	@RequestMapping(value = "/board_sell_write")
-	public String board_sell_write() {
-		log.info("@# board_sell_write");
-		return "board_sell_write";
+	@RequestMapping(value = "/board_rcp_write")
+	public String board_rcp_write() {
+		log.info("@# board_rcp_write");
+		return "board_rcp_write";
 	}
-	@RequestMapping(value = "/write_res")
+	@RequestMapping(value = "/rcp_write")
 	public String write_res(@RequestParam HashMap<String, String> param,
-									 @RequestParam("board_img") MultipartFile[] uploadFiles,
+									 @RequestParam("rcp_img") MultipartFile[] uploadFiles,
 									 Model model) {
-		prod_uploadFile("board_img", param, uploadFiles);
+		prod_uploadFile("rcp_img", param, uploadFiles);
+		log.info("@# 파일 업로드 완료");
 		log.info("@# write_res : param : "+param);
 		boardService.insertBoard(param);
 		
-		return "redirect:board_sell";
+		return "redirect:board_rcp";
 	}
-	@RequestMapping(value = "/board_sell_content")
-	public String board_sell_Content(@RequestParam("board_key") int board_key,
+	@RequestMapping(value = "/board_rcp_content")
+	public String board_rcp_Content(@RequestParam("rcp_key") int rcp_key,
 													Model model) {
-		log.info("@# board_sell_Content : board_key : "+board_key);
-		BoardSellVO vo = boardService.selectBoardContent(board_key);
+		log.info("@# board_rcp_Content : rcp_key : "+rcp_key);
+		BoardRecipesVO vo = boardService.selectBoardContent(rcp_key);
 		model.addAttribute("content", vo);
 		
-		return "board_sell_content";
+		return "board_rcp_content";
 	}
 
 	// 파일 업로드 메소드
@@ -184,34 +185,34 @@ public class UserController {
 			param.put(put_img_name, save_ImgPath.toString().replace("[", "").replace("]", ""));
 		}
 	}
-	@RequestMapping(value = "/board_sell_modify")
-	public String board_sell_modify(@RequestParam HashMap<String, String> param,
+	@RequestMapping(value = "/board_rcp_modify")
+	public String board_rcp_modify(@RequestParam HashMap<String, String> param,
 			Model model) {
-		log.info("@# board_sell_modify : param : "+param);
-		int board_key = Integer.parseInt(param.get("board_key"));
-		BoardSellVO vo = boardService.selectBoardContent(board_key);
+		log.info("@# board_rcp_modify : param : "+param);
+		int rcp_key = Integer.parseInt(param.get("rcp_key"));
+		BoardRecipesVO vo = boardService.selectBoardContent(rcp_key);
 		model.addAttribute("content", vo);
 		
-		return "board_sell_modify";
+		return "board_rcp_modify";
 	}
-	@RequestMapping(value = "/board_sell_modify_method")
-	public String board_sell_modify_method(@RequestParam HashMap<String, String> param,
-									 @RequestParam("board_img") MultipartFile[] uploadFiles,
+	@RequestMapping(value = "/board_rcp_modify_method")
+	public String board_rcp_modify_method(@RequestParam HashMap<String, String> param,
+									 @RequestParam("rcp_img") MultipartFile[] uploadFiles,
 									 Model model) {
-		prod_uploadFile("board_img", param, uploadFiles);
-		log.info("@# board_sell_modify_method : param : "+param);
+		prod_uploadFile("rcp_img", param, uploadFiles);
+		log.info("@# board_rcp_modify_method : param : "+param);
 		boardService.updateBoard(param);
-		int board_key = Integer.parseInt(param.get("board_key"));
+		int rcp_key = Integer.parseInt(param.get("rcp_key"));
 		
-		return "redirect:board_sell_content?board_key="+board_key;
+		return "redirect:board_rcp_content?rcp_key="+rcp_key;
 	}
-	@RequestMapping(value = "/board_sell_delete")
-	public String board_sell_delete(@RequestParam("comm_key") int comm_key,
+	@RequestMapping(value = "/board_rcp_delete")
+	public String board_rcp_delete(@RequestParam("rcp_key") int rcp_key,
 			Model model) {
-		log.info("@# board_sell_delete : comm_key : "+comm_key);
-		boardService.deleteBoard(comm_key);
+		log.info("@# board_rcp_delete : rcp_key : "+rcp_key);
+		boardService.deleteBoard(rcp_key);
 		
-		return "redirect:board_sell";
+		return "redirect:board_rcp";
 	}
 	
 	// board comm --------------------------------------------

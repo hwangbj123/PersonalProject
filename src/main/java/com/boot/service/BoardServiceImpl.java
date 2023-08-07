@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.boot.dao.BoardDAO;
 import com.boot.dto.BoardCommVO;
+import com.boot.dto.BoardRecipesVO;
 import com.boot.dto.BoardReplyVO;
-import com.boot.dto.BoardSellVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,11 +25,11 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.insertBoard(param);
 	}
 	@Override
-	public ArrayList<BoardSellVO> selectBoard(){
+	public ArrayList<BoardRecipesVO> selectBoard(){
 		return boardDAO.selectBoard();
 	}
 	@Override
-	public BoardSellVO selectBoardContent(int board_key) {
+	public BoardRecipesVO selectBoardContent(int board_key) {
 		return boardDAO.selectBoardContent(board_key);
 	}
 	
@@ -72,8 +72,8 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.updateBoard(param);
 	}
 	@Override
-	public void deleteBoard(int board_key) {
-		boardDAO.deleteBoard(board_key);
+	public void deleteBoard(int rcp_key) {
+		boardDAO.deleteBoard(rcp_key);
 	}
 }
 
