@@ -20,6 +20,12 @@
 		height : 80px;
 		border: 1px solid black;
 	}
+	textarea{
+		width: 90%;
+		height: 100px;
+		margin: 10px auto;
+		resize: none;
+	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <script>
@@ -28,6 +34,9 @@
 </script>
 </head>
 <body>
+<c:import url="/nav">
+		<c:param name="user_id" value="${user_id}"/>
+</c:import>
 	<div id="board_content">
 		<form method="post" action="write_res" enctype="multipart/form-data">
 			<table id="board_tb">

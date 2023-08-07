@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,33 +24,35 @@
 	#board_tb td img{
 		display: inline-block;
 	}
+	textarea{
+		width: 90%;
+		height: 100px;
+		margin: 10px auto;
+		resize: none;
+	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <script>
 	$(function(){
-		$("#td_img").height("400px");
-		var td_img = 0;
-		$("#big").on("click", function(){
-			if (td_img==0){
-				$("#td_img").css("height","auto");
-				td_img = 1;
-			}else{
-				$("#td_img").css("height","400px");
-				td_img = 0;
-			}
-		})
+		$("#modify_btn").on("click",function(){
+			alert("수정되었습니다");
+			$("#modify_frm").submit();
+		});
 	});
 </script>
 </head>
 <body>
+<c:import url="/nav">
+		<c:param name="user_id" value="${user_id}"/>
+</c:import>
 	<div id="board_content">
-		<form method="post" action="#">
+		<form method="post" id="modify_frm" action="board_comm_modify_method" enctype="multipart/form-data">
 			<table id="board_tb">
 				<tr>
 					<td width="20%">작성자</td>
 					<td>
 						${content.user_id}
-<!-- 						<input type="text" name="user_id"> -->
+						<input type="hidden" name="comm_key" value="${content.comm_key}">
 					</td> 
 				</tr>
 				<tr>
@@ -62,25 +63,20 @@
 				</tr>
 				<tr>
 					<td><span id="big">이미지</span></td>
-					<td id="td_img">
-						<div style="height: 100%; overflow: auto;">
-						<c:set var="imgs" value="${fn:split(content.comm_img,',')}"/>
-						<c:forEach var="img" items="${imgs}">
-							<img src="/image/${fn:trim(img)}" style="width: 90%;">
-						</c:forEach>
-						</div>
+					<td>
+						<input type="file" id="upload_btn" name="comm_img" multiple="multiple" value="이미지 첨부">
 					</td>
 				</tr>
 				<tr>
 					<td>내용</td>
 					<td>
-						<textarea name="comm_content" value="${content.comm_content}">
-						</textarea>
+						<textarea name="comm_content" >${content.comm_content}</textarea>
 					</td> 
 				</tr>
 				<tr id="tr_modify">
 					<td colspan="2">
-						<input type="submit" value="수정하기">
+					
+						<input type="button" id="modify_btn" value="수정하기">
 						<input type="button" onclick="location='board_comm'"value="목록">
 					</td>
 				</tr>

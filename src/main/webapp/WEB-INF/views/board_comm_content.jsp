@@ -48,28 +48,43 @@
 		});
 		
 		$("#reply_btn").on("click", function(){
-			if($("textarea[name='reply_content']").val().length ==0){
-				alert("댓글 내용을 입력해주세요");
-			}else{
-				var replyData = $("#reply_frm").serialize();
-				$.ajax({
-					type: "post",
-					url: "board_reply_write",
-					data: replyData,
-					success: function(){
-						alert("댓글을 작성하였습니다");
-						location.reload();
-					},
-					error: function(){
-						alert("오류발생");
-					}
-				});
+			if (${not empty user_id}){
+				 if($("textarea[name='reply_content']").val().length ==0){
+						alert("댓글 내용을 입력해주세요");
+				}else{
+					var replyData = $("#reply_frm").serialize();
+					$.ajax({
+						type: "post",
+						url: "board_reply_write",
+						data: replyData,
+						success: function(){
+							alert("댓글을 작성하였습니다");
+							location.reload();
+						},
+						error: function(){
+							alert("오류발생");
+						}
+					});
+				}
+		}else{
+			if(confirm("로그인이 필요한 서비스입니다\n로그인 화면으로 이동하시겠습니까?")){
+				location="login";
 			}
-		});
+		}
 	});
+});
+	function comm_delete(comm_key){
+		if(confirm("정말 삭제하시겠습니까?")){
+			alert("게시글이 삭제되었습니다");
+			location="board_comm_delete?comm_key="+comm_key;	
+		}
+	}
 </script>
 </head>
 <body>
+<c:import url="/nav">
+		<c:param name="user_id" value="${user_id}"/>
+</c:import>
 	<div id="board_content">
 			<table id="board_tb">
 				<tr>
@@ -105,7 +120,8 @@
 				<tr>
 					<td colspan="2">
 					<c:if test="${content.user_id eq user_id}">
-						<input type="button" onclick="location='board_comm_modify'" value="수정하기">
+						<input type="button" onclick="location='board_comm_modify?comm_key=${content.comm_key}'" value="수정하기">
+						<input type="button" onclick="comm_delete(${content.comm_key})" value="삭제하기">
 					</c:if>
 						<input type="button" onclick="location='board_comm'"value="목록">
 					</td>
@@ -113,13 +129,17 @@
 				<c:forEach items="${reply}" var="reply">
 					<tr>
 						<td>
+							<c:if test="${rereply_key eq reply.reply_key}">
+								[대댓글]<br>
+							</c:if>
 							${reply.reply_id}<br>
 							${reply.reply_date}
 						</td>
 						<td>
-							${reply.reply_content}
+							${reply.reply_content}<br>
 						</td>
 					</tr>
+					<c:set var="rereply_key" value="${reply.reply_key}"/>
 				</c:forEach>
 				<c:if test="${not empty content.user_id}">
 				<tr>

@@ -100,6 +100,11 @@ public class UserController {
 		log.info("@# inst");
 		return "inst";
 	}
+	@RequestMapping(value = "/nav")
+	public String nav() {
+		log.info("@# nav");
+		return "include/nav";
+	}
 // board sell ----------------------------------------------
 	@RequestMapping(value = "/board_sell")
 	public String board_sell(Model model) {
@@ -179,6 +184,36 @@ public class UserController {
 			param.put(put_img_name, save_ImgPath.toString().replace("[", "").replace("]", ""));
 		}
 	}
+	@RequestMapping(value = "/board_sell_modify")
+	public String board_sell_modify(@RequestParam HashMap<String, String> param,
+			Model model) {
+		log.info("@# board_sell_modify : param : "+param);
+		int board_key = Integer.parseInt(param.get("board_key"));
+		BoardSellVO vo = boardService.selectBoardContent(board_key);
+		model.addAttribute("content", vo);
+		
+		return "board_sell_modify";
+	}
+	@RequestMapping(value = "/board_sell_modify_method")
+	public String board_sell_modify_method(@RequestParam HashMap<String, String> param,
+									 @RequestParam("board_img") MultipartFile[] uploadFiles,
+									 Model model) {
+		prod_uploadFile("board_img", param, uploadFiles);
+		log.info("@# board_sell_modify_method : param : "+param);
+		boardService.updateBoard(param);
+		int board_key = Integer.parseInt(param.get("board_key"));
+		
+		return "redirect:board_sell_content?board_key="+board_key;
+	}
+	@RequestMapping(value = "/board_sell_delete")
+	public String board_sell_delete(@RequestParam("comm_key") int comm_key,
+			Model model) {
+		log.info("@# board_sell_delete : comm_key : "+comm_key);
+		boardService.deleteBoard(comm_key);
+		
+		return "redirect:board_sell";
+	}
+	
 	// board comm --------------------------------------------
 	@RequestMapping(value = "/board_comm")
 	public String board_comm(Model model) {
@@ -216,6 +251,34 @@ public class UserController {
 		model.addAttribute("reply", reply);
 		
 		return "board_comm_content";
+	}
+	@RequestMapping(value = "/board_comm_modify")
+	public String board_comm_modify(@RequestParam HashMap<String, String> param,
+			Model model) {
+		log.info("@# board_comm_modify : param : "+param);
+		int comm_key = Integer.parseInt(param.get("comm_key"));
+		BoardCommVO vo = boardService.selectBoardCommContent(comm_key);
+		model.addAttribute("content", vo);
+		
+		return "board_comm_modify";
+	}
+	@RequestMapping(value = "/board_comm_modify_method")
+	public String board_comm_modify_method(@RequestParam HashMap<String, String> param,
+									 @RequestParam("comm_img") MultipartFile[] uploadFiles,
+									 Model model) {
+		prod_uploadFile("comm_img", param, uploadFiles);
+		log.info("@# board_comm_modify_method : param : "+param);
+		boardService.updateBoardComm(param);
+		
+		return "redirect:board_comm";
+	}
+	@RequestMapping(value = "/board_comm_delete")
+	public String board_comm_delete(@RequestParam("comm_key") int comm_key,
+			Model model) {
+		log.info("@# board_comm_delete : comm_key : "+comm_key);
+		boardService.deleteBoardComm(comm_key);
+		
+		return "redirect:board_comm";
 	}
 	
 	@RequestMapping(value="/board_reply_write")

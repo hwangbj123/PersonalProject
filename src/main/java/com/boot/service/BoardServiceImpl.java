@@ -47,6 +47,16 @@ public class BoardServiceImpl implements BoardService {
 	public BoardCommVO selectBoardCommContent(int comm_key) {
 		return boardDAO.selectBoardCommContent(comm_key);
 	}
+	@Override
+	public void updateBoardComm(HashMap<String, String> param) {
+		log.info("@# updateBoardComm");
+		boardDAO.updateBoardComm(param);
+	}
+	@Override
+	public void deleteBoardComm(int comm_key) {
+		log.info("@# deleteBoardComm");
+		boardDAO.deleteBoardComm(comm_key);
+	}
 	
 	@Override
 	public void insertBoardReply(HashMap<String, String> param) {
@@ -56,6 +66,14 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ArrayList<BoardReplyVO> selectBoardReply(int comm_key){
 		return boardDAO.selectBoardReply(comm_key);
+	}
+	@Override
+	public void updateBoard(HashMap<String, String> param) {
+		boardDAO.updateBoard(param);
+	}
+	@Override
+	public void deleteBoard(int board_key) {
+		boardDAO.deleteBoard(board_key);
 	}
 }
 

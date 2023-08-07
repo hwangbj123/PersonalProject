@@ -29,24 +29,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <script>
 	$(function(){
-		$("#td_img").height("400px");
-		var td_img = 0;
-		$("#big").on("click", function(){
-			if (td_img==0){
-				$("#td_img").css("height","auto");
-				td_img = 1;
-			}else{
-				$("#td_img").css("height","400px");
-				td_img = 0;
-			}
-		})
+		$("#modify_btn").on("click",function(){
+			alert("수정되었습니다");
+			$("#modify_frm").submit();
+		});
 	});
-	function comm_delete(comm_key){
-		if(confirm("정말 삭제하시겠습니까?")){
-			alert("게시글이 삭제되었습니다");
-			location="board_sell_delete?comm_key="+comm_key;	
-		}
-	}
 </script>
 </head>
 <body>
@@ -54,42 +41,37 @@
 		<c:param name="user_id" value="${user_id}"/>
 </c:import>
 	<div id="board_content">
-		<form method="post" action="#">
+		<form method="post" id="modify_frm" action="board_sell_modify_method" enctype="multipart/form-data">
 			<table id="board_tb">
 				<tr>
 					<td width="20%">작성자</td>
 					<td>
 						${content.user_id}
-<!-- 						<input type="text" name="user_id"> -->
 					</td> 
 				</tr>
 				<tr>
 					<td width="20%">제목</td>
 					<td>
-						${content.board_title}
+						<input type="text" name="board_title" value="${content.board_title}">
+						<input type="hidden" name="board_key" value="${content.board_key}">
 					</td> 
 				</tr>
 				<tr>
 					<td  id="big">상품</td>
-					<td id="td_img">
-						<div style="height: 100%; overflow: auto;">
-						<c:set var="imgs" value="${fn:split(content.board_img,',')}"/>
-						<c:forEach var="img" items="${imgs}">
-							<img src="/image/${fn:trim(img)}" style="width: 90%;">
-						</c:forEach>
-						</div>
+					<td>
+						<input type="file" id="upload_btn" name="board_img" multiple="multiple" value="상품 등록">
 					</td>
 				</tr>
 				<tr>
 					<td>내용</td>
 					<td>
-						${content.board_content }
+						<input type="text" name="board_content" value="${content.board_content}">
 					</td> 
 				</tr>
 				<tr>
 					<td>가격</td>
 					<td>
-						${content.board_price}
+						<input type="text" name="board_price" value="${content.board_price}">
 					</td>
 				</tr>
 				<tr>
@@ -99,6 +81,9 @@
 					<td>
 						<c:if test="${content.board_res == '0'}">
 							<c:out value="판매 중"/>
+							<c:if test="${content.user_id eq user_id}">
+								<br><input type="button" id="sellout_btn" value="판매완료하기">
+							</c:if>
 						</c:if>
 						<c:if test="${content.board_res == '1'}">
 							<c:out value="판매 완료"/>
@@ -108,9 +93,8 @@
 				<tr id="tr_modify">
 					<td colspan="2">
 						<c:if test="${content.user_id eq user_id}">
-						<input type="button" onclick="location='board_sell_modify?board_key=${content.board_key}'" value="수정하기">
-						<input type="button" onclick="comm_delete(${content.board_key})" value="삭제하기">
-					</c:if>
+							<input type="button" id="modify_btn" value="수정하기">
+						</c:if>
 						<input type="button" onclick="location='board_sell'"value="목록">
 					</td>
 				</tr>

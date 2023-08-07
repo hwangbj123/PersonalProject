@@ -44,7 +44,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 //			modelAndView.addObject("user_id", user_id);
 			
 			log.info("@@@@@ loginInterceptor : 로그인되어있습니다 : "+user_id);
-			log.info("@@@@@ loginInterceptor 남은 시간 : " + remainingMinutes + "분 " + remainingSeconds + "초");
+//			log.info("@@@@@ loginInterceptor 남은 시간 : " + remainingMinutes + "분 " + remainingSeconds + "초");
 //			log.info("@@@@@ loginInterceptor : 유지 시간을 갱신합니다");
 			session.setMaxInactiveInterval(1800);
 		}

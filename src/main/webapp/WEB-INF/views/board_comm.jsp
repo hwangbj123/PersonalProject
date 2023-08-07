@@ -46,6 +46,9 @@
 </script>
 </head>
 <body>
+<c:import url="/nav">
+		<c:param name="user_id" value="${user_id}"/>
+</c:import>
 	<div id="board_content">
 		<table id="board_tb">
 		<caption><h1>커뮤니티 게시판</h1></caption>

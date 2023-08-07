@@ -51,6 +51,21 @@
 		from board_sell
 		where board_key = #{board_key}
     </select>
+    <insert id="updateBoard" parameterType="hashmap">
+	    update board_sell
+	    set 
+		    BOARD_TITLE = #{board_title},
+		    BOARD_CONTENT = #{board_content},
+		    BOARD_IMG = #{board_img},
+		    BOARD_PRICE = #{board_price},
+		    BOARD_DATE = sysdate
+	    where BOARD_KEY = #{board_key}
+    </insert>
+    <delete id="deleteBoard">
+		delete board_sell where BOARD_KEY=#{board_key}
+    </delete>
+    
+    
     <insert id="insertBoardComm" parameterType="hashmap">
 	    insert into board_comm(
 		    			COMM_KEY
@@ -93,6 +108,18 @@
 		from board_comm
 		where COMM_KEY = #{comm_key}
     </select>
+    <insert id="updateBoardComm" parameterType="hashmap">
+	    update board_comm
+	    set 
+		    COMM_TITLE = #{comm_title},
+		    COMM_CONTENT = #{comm_content},
+		    COMM_IMG = #{comm_img},
+		    COMM_DATE = sysdate
+	    where COMM_KEY = #{comm_key}
+    </insert>
+    <delete id="deleteBoardComm">
+		delete board_comm where COMM_KEY=#{comm_key}
+    </delete>
     
     <insert id="insertBoardReply" parameterType="hashmap">
 	    insert into board_reply(
