@@ -136,7 +136,7 @@ $(function(){
 					<td>
 						<input type="text" id="rcp_ing_1"  style="width: 75px; height: 30px;">
 						<input type="button" id="rcp_ing_btn" style="width: 75px; height: 36px;" value="+">
-						<input type="button" id="rcp_ing_btn2" style="width: 75px; height: 36px;" value="test">
+<!-- 						<input type="button" id="rcp_ing_btn2" style="width: 75px; height: 36px;" value="test"> -->
 						<br><input type="hidden" name="rcp_ing">
 					</td>
 				</tr>
@@ -145,7 +145,7 @@ $(function(){
 					<td>
 						<textarea id="rcp_content_1"></textarea><br>
 						<input type="button" id="rcp_content_btn" style="width: 75px; height: 36px;" value="+">
-						<input type="button" id="rcp_content_btn2" style="width: 75px; height: 36px;" value="test">
+<!-- 						<input type="button" id="rcp_content_btn2" style="width: 75px; height: 36px;" value="test"> -->
 						<br><input type="hidden" name="rcp_content">
 					</td> 
 				</tr>
@@ -160,7 +160,7 @@ $(function(){
 					<td>
 						<input type="text" id="rcp_tag_1"  style="width: 75px; height: 30px;" value="#">
 						<input type="button" id="rcp_tag_btn" style="width: 75px; height: 36px;" value="+">
-						<input type="button" id="rcp_tag_btn2" style="width: 75px; height: 36px;" value="test">
+<!-- 						<input type="button" id="rcp_tag_btn2" style="width: 75px; height: 36px;" value="test"> -->
 						<br><input type="hidden" name="rcp_tag">
 					</td>
 				</tr>

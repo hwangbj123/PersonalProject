@@ -15,6 +15,7 @@ public interface BoardService {
 	public void deleteBoard(int rcp_key);
 	public void boardGoodUp(int rcp_key);
 	public void boardGoodDown(int rcp_key);
+	public ArrayList<BoardRecipesVO> searchBoard(String search_input);
 	
 	public void insertBoardComm(HashMap<String, String> param);
 	public ArrayList<BoardCommVO> selectBoardComm();

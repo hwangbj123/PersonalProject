@@ -83,6 +83,10 @@ public class BoardServiceImpl implements BoardService {
 	public void boardGoodDown(int rcp_key) {
 		boardDAO.boardGoodDown(rcp_key);
 	}
+	@Override
+	public ArrayList<BoardRecipesVO> searchBoard(String search_input) {
+		return boardDAO.searchBoard(search_input);
+	}
 }
 
 

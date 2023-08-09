@@ -11,7 +11,7 @@
 	#board_content{
 		width: 800px;
 		margin: 0 auto;
-		border: 1px solid black;
+/* 		border: 1px solid black; */
 	}
 	#board_tb{
 		width: 100%;
@@ -87,6 +87,7 @@
 </c:import>
 	<div id="board_content">
 			<table id="board_tb">
+			<caption><h1>${content.comm_title}</h1></caption>
 				<tr>
 					<td width="20%">작성자</td>
 					<td>
@@ -94,14 +95,14 @@
 <!-- 						<input type="text" name="user_id"> -->
 					</td> 
 				</tr>
+<!-- 				<tr> -->
+<!-- 					<td width="20%">제목</td> -->
+<!-- 					<td> -->
+<%-- 						${content.comm_title} --%>
+<!-- 					</td>  -->
+<!-- 				</tr> -->
 				<tr>
-					<td width="20%">제목</td>
-					<td>
-						${content.comm_title}
-					</td> 
-				</tr>
-				<tr>
-					<td><span id="big">이미지</span></td>
+					<td rowspan="2">내용</td>
 					<td id="td_img">
 						<div style="height: 100%; overflow: auto;">
 						<c:set var="imgs" value="${fn:split(content.comm_img,',')}"/>
@@ -112,7 +113,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>내용</td>
 					<td>
 						${content.comm_content }
 					</td> 

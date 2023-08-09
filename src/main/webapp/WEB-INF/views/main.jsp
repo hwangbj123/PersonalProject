@@ -8,25 +8,11 @@
 <title>Insert title here</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <style>
-/* 	body{ */
-/* 		margin: 0; */
-/* 	} */
-/* 	.container{ */
-/* 		background-image: url("/images/Worldwide-Food.jpg"); */
-/* 		width: 100%; */
-/* 		height: 100%; */
-/*  		opacity: 0.7; */
-/*  		position: fixed; */
-/*  		background-repeat: no-repeat; */
-/*  		background-size: cover; */
-/*         background-attachment: fixed; */
-/*  		z-index: -1; */
-/* 	} */
 	#main_tb{
 		border-collapse: collapse;
 		border: 1px solid black;
 		width: 700px; height: 700px;
-		margin: 200px auto;
+		margin: auto;
 		text-align: center;
 	}
 	#main_tb td{
@@ -48,6 +34,7 @@
 </c:import>
 <!-- <div class="container"></div> -->
 <table id="main_tb">
+	<caption><span style="font-size: 3em;">Recipes of Man</span></caption>
 	<tr>
 		<td colspan="2"><a href="board_rcp">레시피</a></td>
 	</tr>

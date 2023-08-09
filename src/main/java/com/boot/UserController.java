@@ -83,6 +83,13 @@ public class UserController {
 		userService.insertUser(vo);
 	}
 	
+	@RequestMapping(value="/myPage")
+	public String myPage(HttpSession session, Model model) {
+		String user_id = (String) session.getAttribute("user_id");
+		model.addAttribute("user_id", user_id);
+		return "myPage";
+	}
+	
 // main --------------------------------------------------	
 	@RequestMapping(value = "/main")
 	public String main(HttpSession session) {
@@ -191,6 +198,17 @@ public class UserController {
 		log.info("user_good : "+user_good);
 		return -1;
 	}
+	@RequestMapping(value = "/board_rcp_search")
+	public String board_rcp_search(@RequestParam("search_input") String search_input, Model model) {
+		log.info("@# board_rcp_search");
+		
+		ArrayList<BoardRecipesVO> list = boardService.searchBoard(search_input);
+		
+		model.addAttribute("list", list);
+		log.info("@# board_rcp_search list : "+list);
+		return "board_rcp_search";
+	}
+	
 
 	// 파일 업로드 메소드
 	public void prod_uploadFile(String put_img_name, @RequestParam HashMap<String, String> param,

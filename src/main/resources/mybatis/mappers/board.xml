@@ -36,6 +36,33 @@
 		from board_recipes
 		order by rcp_key desc
     </select>
+    <select id="searchBoard" resultType="com.boot.dto.BoardRecipesVO" parameterType="String">
+    	select * from(
+    	select 
+    		rcp_key
+			,user_id
+			,rcp_title
+			,rcp_content
+			,rcp_tag
+			,rcp_ing
+			,rcp_img
+			, rcp_date
+		from board_recipes
+		where rcp_title like '%'||#{search_input}||'%'
+			union
+		select 
+    		rcp_key
+			,user_id
+			,rcp_title
+			,rcp_content
+			,rcp_tag
+			,rcp_ing
+			,rcp_img
+			, rcp_date
+		from board_recipes
+		where rcp_tag like '%'||#{search_input}||'%'
+		) order by rcp_key desc
+    </select>
     <select id="selectBoardContent" parameterType="int" resultType="com.boot.dto.BoardRecipesVO">
     	select 
     		rcp_key

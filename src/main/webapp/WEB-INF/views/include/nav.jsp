@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 	body{
-		margin: 0;
+		margin: 50px 0px;
 	}
 	.container{
 		background-image: url("/images/Worldwide-Food.jpg");
@@ -21,10 +21,12 @@
  		z-index: -1;
 	}
 	nav{
+		position: fixed;
+		top: 0px;
 		width: 100%;
-		margin: 0;
 		display: inline-block;
 		background-color: #eee;
+		z-index: 99;
 	}
 	ul{
 		display: flex;
@@ -59,6 +61,11 @@
 				}
 			}
 		});
+		$("#search").on("click", function(){
+			if($("#search_input").val().length!=0){
+				location="board_rcp_search?search_input="+$("#search_input").val();
+			}
+		});
 	});
 </script>
 </head>
@@ -67,7 +74,7 @@
 	<div style="width: 50%; float: left">
 		<ul id="nav_menu">
 			<li><a href="main">메인</a></li>
-			<li><a href="board_rcp">거래</a></li>
+			<li><a href="board_rcp">레시피</a></li>
 			<li><a href="board_comm">커뮤니티</a></li>
 			<li><a href="#" id="myPage_btn">마이페이지</a></li>
 		</ul>

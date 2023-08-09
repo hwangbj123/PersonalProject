@@ -80,14 +80,6 @@
         $(".rcp").hide();
         showNextDivs();
         $(window).on("scroll", checkScroll);
-
-        $("#tb_search").on("click", function(){
-        	if($("#tb_search_input").val().length!=0){
-				location="board_rcp_search?search_input="+$("#tb_search_input").val();
-			}else{
-				alert("검색어를 입력해주세요");
-			}
-        });
 	});
 </script>
 </head>
@@ -135,8 +127,8 @@
 		<table style="min-width: 800px; width: 90%; margin: auto; text-align: right; height: 50px;">
 			<tr>
 				<td style="background-color:rgba(0,0,0,0);">
-					<input type="text" id="tb_search_input">
-					<input type="button" id="tb_search" value="검색">
+					<input type="text" id="search_input">
+					<input type="button" id="search_btn" value="검색">
 					<input type="button" id="board_rcp_write" value="글쓰기">
 				</td>
 			</tr>

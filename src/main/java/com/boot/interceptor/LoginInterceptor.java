@@ -14,14 +14,14 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		log.info("@@@@@# loginInterceptor preHandler");
+//		log.info("@@@@@# loginInterceptor preHandler");
 		
 		return true;
 	}
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		log.info("@@@@@# loginInterceptor postHandler");
+//		log.info("@@@@@# loginInterceptor postHandler");
 		
 		HttpSession session = request.getSession(false);
 		
@@ -40,7 +40,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 			int remainingSeconds = (int) ((remainingTime / 1000) % 60);
 		
 			String user_id = (String) session.getAttribute("user_id");
-			log.info("@@@@@ loginInterceptor user_id : "+user_id);
+//			log.info("@@@@@ loginInterceptor user_id : "+user_id);
 //			modelAndView.addObject("user_id", user_id);
 			
 			log.info("@@@@@ loginInterceptor : 로그인되어있습니다 : "+user_id);

@@ -12,7 +12,7 @@
 		border-collapse: collapse;
 		border: 1px solid black;
 		width: 700px; height: 700px;
-		margin: 200px auto;
+		margin: auto;
 		text-align: center;
 	}
 	#main_tb td{
@@ -34,8 +34,9 @@
 </c:import>
 <!-- <div class="container"></div> -->
 <table id="main_tb">
+	<caption><span style="font-size: 3em;">My Page</span></caption>
 	<tr>
-		<td colspan="2"><a href="board_rcp">${info.user_id} 님 환영합니다</a></td>
+		<td colspan="2"><a href="board_rcp"><span>${user_id}</span>  님 환영합니다</a></td>
 	</tr>
 	<tr>
 		<td style="width: 50%;"><a href="#">작성한 커뮤니티</a></td>
