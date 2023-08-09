@@ -16,12 +16,13 @@
 		min-height: 300px;
 	}
 	#board_tb{
-		background-color: white;
 		width: 100%;
 		border-collapse: collapse;
 		text-align: center;
+		background-color: rgba(255,255,255,0.9);
 	}
 	#board_tb td{
+		background-color: rgba(255,255,255,0);
 		padding: 20px;
 	}
 	.board_img{
@@ -96,7 +97,7 @@
 		<c:param name="user_id" value="${user_id}"/>
 </c:import>
 	<div id="board_content">
-		<table id="board_tb">
+		<table id="board_tb" >
 			<caption><h1 style="text-align: center;">레시피 게시판</h1></caption>
 			<tr>
 				<c:forEach items="${list}" var="list" varStatus="status">

@@ -11,7 +11,7 @@
 	#board_content{
 		width: 800px;
 		margin: 0 auto;
-		border: 1px solid black;
+/* 		border: 1px solid black; */
 	}
 	#board_tb{
 		width: 100%;

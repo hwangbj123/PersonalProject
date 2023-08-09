@@ -25,7 +25,7 @@
 		top: 0px;
 		width: 100%;
 		display: inline-block;
-		background-color: #eee;
+		background-color: #ffeede;
 		z-index: 99;
 	}
 	ul{
@@ -41,7 +41,7 @@
 		font-size: 17px;
 	}
 	td{
-		background-color: white;
+		background-color: rgba(255,255,255,0.9);
 	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
