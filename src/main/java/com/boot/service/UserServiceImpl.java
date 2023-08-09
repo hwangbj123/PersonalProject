@@ -26,6 +26,16 @@ public class UserServiceImpl implements UserService {
 		return userDAO.checkUser(user_id);
 	}
 
+	@Override
+	public String selectUserGood(String user_id) {
+		return userDAO.selectUserGood(user_id);
+	}
+
+	@Override
+	public void addUserGood(String user_id, String user_good) {
+		userDAO.addUserGood(user_id, user_good);
+	}
+
 }
 
 

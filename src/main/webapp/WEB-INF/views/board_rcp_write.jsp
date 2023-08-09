@@ -141,7 +141,7 @@ $(function(){
 					</td>
 				</tr>
 				<tr>
-					<td>내용</td>
+					<td>조리순서</td>
 					<td>
 						<textarea id="rcp_content_1"></textarea><br>
 						<input type="button" id="rcp_content_btn" style="width: 75px; height: 36px;" value="+">

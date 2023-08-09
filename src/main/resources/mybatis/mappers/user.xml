@@ -25,4 +25,14 @@
     <select id="checkUser" parameterType="String" resultType="com.boot.dto.UserVO">
     	select * from user_table where user_id = #{user_id}
     </select>
+    <select id="selectUserGood" parameterType="String" resultType="String">
+    	select user_good 
+    	from user_table 
+    	where user_id=#{user_id}
+    </select>
+    <update id="addUserGood" parameterType="hashmap">
+    	update user_table
+    	set user_good = #{user_good}
+    	where user_id = #{user_id}
+    </update>
 </mapper>

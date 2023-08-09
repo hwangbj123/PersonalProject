@@ -76,12 +76,12 @@
 						</td>
 					</tr>
 				</c:forEach>
+		</table>
+		<table id="board_tb">
 			<tr>
-				<td colspan="3">
+				<td colspan="4" style="height: 50px; text-align: right; background-color:rgba(0,0,0,0); border: 0;">
 					<input type="text" id="search_input">
 					<input type="button" id="search_btn" value="검색">
-				</td>
-				<td>
 					<input type="button" id="board_comm_write" value="글쓰기">
 				</td>
 			</tr>

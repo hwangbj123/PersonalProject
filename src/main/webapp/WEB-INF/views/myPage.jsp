@@ -8,20 +8,6 @@
 <title>Insert title here</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <style>
-/* 	body{ */
-/* 		margin: 0; */
-/* 	} */
-/* 	.container{ */
-/* 		background-image: url("/images/Worldwide-Food.jpg"); */
-/* 		width: 100%; */
-/* 		height: 100%; */
-/*  		opacity: 0.7; */
-/*  		position: fixed; */
-/*  		background-repeat: no-repeat; */
-/*  		background-size: cover; */
-/*         background-attachment: fixed; */
-/*  		z-index: -1; */
-/* 	} */
 	#main_tb{
 		border-collapse: collapse;
 		border: 1px solid black;
@@ -30,7 +16,7 @@
 		text-align: center;
 	}
 	#main_tb td{
-		border: 1px solid black;
+/* 		border: 1px solid black; */
 		background-color: rgba(250,250,250,0.9);
 	}
 	#main_tb td a{
@@ -49,11 +35,11 @@
 <!-- <div class="container"></div> -->
 <table id="main_tb">
 	<tr>
-		<td colspan="2"><a href="board_rcp">레시피</a></td>
+		<td colspan="2"><a href="board_rcp">${info.user_id} 님 환영합니다</a></td>
 	</tr>
 	<tr>
-		<td style="width: 50%;"><a href="board_comm">커뮤니티</a></td>
-		<td style="width: 50%;"><a href="myPage">마이페이지</a></td>
+		<td style="width: 50%;"><a href="#">작성한 커뮤니티</a></td>
+		<td style="width: 50%;"><a href="#">관심 레시피 목록</a></td>
 	</tr>
 </table>
 </body>

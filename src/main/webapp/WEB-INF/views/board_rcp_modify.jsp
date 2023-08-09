@@ -148,7 +148,7 @@ $(function(){
 					</td>
 				</tr>
 				<tr>
-					<td>내용</td>
+					<td>조리순서</td>
 					<td>
 						<c:set var="contentText" value="${content.rcp_content}"/>
 						<c:set var="contentTextReplace" value="${fn:split(contentText, '|')}"/>

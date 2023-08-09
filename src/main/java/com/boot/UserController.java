@@ -134,12 +134,62 @@ public class UserController {
 	}
 	@RequestMapping(value = "/board_rcp_content")
 	public String board_rcp_Content(@RequestParam("rcp_key") int rcp_key,
+												   HttpSession session,
 													Model model) {
 		log.info("@# board_rcp_Content : rcp_key : "+rcp_key);
+		String user_id = (String)session.getAttribute("user_id");
+		log.info("@# board_rcp_Content : user_id : "+user_id);
 		BoardRecipesVO vo = boardService.selectBoardContent(rcp_key);
 		model.addAttribute("content", vo);
 		
+		String user_good = userService.selectUserGood(user_id);
+		String[] goods = user_good.split("\\|");
+		int goodYN = 0;
+		for (String good : goods) {
+			if(good.equals(""+rcp_key)) {
+				log.info("good = rcp_key");
+				goodYN = 1;
+			}
+		}
+		model.addAttribute("goodYN", goodYN);
+		
 		return "board_rcp_content";
+	}
+	
+	@RequestMapping(value="/good")
+	@ResponseBody
+	public int board_rcp_good(@RequestParam("rcp_id") String rcp_id,
+											  @RequestParam("user_id") String user_id,
+											  @RequestParam("rcp_key") int rcp_key) {
+		log.info("rcp_id : "+rcp_id);
+		log.info("user_id : "+user_id);
+		log.info("rcp_key : "+rcp_key);
+		
+		String user_good = userService.selectUserGood(user_id);
+		if (user_good==null) {
+			user_good = "|"+rcp_key;
+		}else {
+			String[] goods = user_good.split("\\|");
+			for (String good : goods) {
+				log.info("good : "+good);
+				if(good.equals(""+rcp_key)) {
+					log.info("good = rcp_key");
+					user_good = user_good.replace("|"+rcp_key, "");
+					userService.addUserGood(user_good, user_id);
+					boardService.boardGoodDown(rcp_key);
+					return -1;
+				}
+			}
+			log.info("good != rcp_key");
+			user_good = user_good+"|"+rcp_key;
+			userService.addUserGood(user_good, user_id);
+			boardService.boardGoodUp(rcp_key);
+			return 1;
+		}
+//		userService.addUserGood(user_good, user_id);
+		
+		log.info("user_good : "+user_good);
+		return -1;
 	}
 
 	// 파일 업로드 메소드

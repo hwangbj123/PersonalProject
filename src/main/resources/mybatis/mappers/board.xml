@@ -63,6 +63,16 @@
     <delete id="deleteBoard">
 		delete board_recipes where rcp_key=#{rcp_key}
     </delete>
+    <update id="boardGoodUp" parameterType="int">
+    	update board_recipes
+    	set rcp_good = rcp_good+1
+    	where rcp_key = #{rcp_key}
+    </update>
+    <update id="boardGoodDown" parameterType="int">
+    	update board_recipes
+    	set rcp_good = rcp_good-1
+    	where rcp_key = #{rcp_key}
+    </update>
     
     
     <insert id="insertBoardComm" parameterType="hashmap">

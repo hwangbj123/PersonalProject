@@ -16,7 +16,7 @@
 		min-height: 300px;
 	}
 	#board_tb{
-/* 		border: 1px solid black; */
+		background-color: white;
 		width: 100%;
 		border-collapse: collapse;
 		text-align: center;
@@ -43,8 +43,9 @@
 				}
 			}
 		});
-		
-		for(var i = 1; i<=10; i++){
+		var img_cnt = $(".rcp_img").length;
+		console.log("img_cnt : "+img_cnt);
+		for(var i = 1; i<=img_cnt; i++){
 			var img = $("#rcp_img_"+i);
 			if(img.length > 0){
 				img.css("object-fit","cover");
@@ -52,6 +53,33 @@
 				img.css("height","100%");
 			}
 		}
+		
+		var additionalDivsToShow = 9;
+        var divsPerRow = 3;
+        var currentDivIndex = 0;
+        
+        function showNextDivs() {
+            for (var i = currentDivIndex; i < currentDivIndex + additionalDivsToShow; i++) {
+                if (i >= img_cnt) {
+                    $(window).off("scroll", checkScroll);
+                    break;
+                }
+                $(".rcp").eq(i).show();
+            }
+            currentDivIndex += additionalDivsToShow;
+        }
+        
+        function checkScroll() {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                showNextDivs();
+            }
+        }
+        $("#more_btn").on("click", function(){
+        	showNextDivs();
+        });
+        $(".rcp").hide();
+        showNextDivs();
+        $(window).on("scroll", checkScroll);
 	});
 </script>
 </head>
@@ -64,7 +92,7 @@
 		<table id="board_tb">
 			<tr>
 				<c:forEach items="${list}" var="list" varStatus="status">
-					<td>
+					<td class="rcp">
 <%-- 						${list.rcp_key}<br> --%>
 <!-- 							다수 이미지일 때 첫번째 이미지를 썸네일로 -->
 							<c:set var="img" value="${list.rcp_img}"/>
@@ -91,16 +119,20 @@
 				</c:if>
 				</c:forEach>
 				</tr>
+				<tr><td colspan="3">
+					<input type="button" id="more_btn" value="더보기">
+				</td></tr>
 			</table>
 		</div>
-		<table style="min-width: 800px; width: 90%; margin: auto; text-align: right;">
+		<table style="min-width: 800px; width: 90%; margin: auto; text-align: right; height: 50px;">
 			<tr>
-				<td>
+				<td style="background-color:rgba(0,0,0,0);">
 					<input type="text" id="search_input">
 					<input type="button" id="search_btn" value="검색">
 					<input type="button" id="board_rcp_write" value="글쓰기">
 				</td>
 			</tr>
+			<tr><td style="height: 200px; background-color:rgba(0,0,0,0);"></td></tr>
 		</table>
 </body>
 </html>

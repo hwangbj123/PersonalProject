@@ -6,6 +6,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	body{
+		margin: 0;
+	}
+	.container{
+		background-image: url("/images/Worldwide-Food.jpg");
+		width: 100%;
+		height: 100%;
+ 		opacity: 0.7;
+ 		position: fixed;
+ 		background-repeat: no-repeat;
+ 		background-size: cover;
+        background-attachment: fixed;
+ 		z-index: -1;
+	}
 	nav{
 		width: 100%;
 		margin: 0;
@@ -24,6 +38,9 @@
 		color: black;
 		font-size: 17px;
 	}
+	td{
+		background-color: white;
+	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <script>
@@ -33,6 +50,15 @@
 			$("#login").attr("onclick", "location='logout'");
 			$("#signup").hide();
 		}
+		$("#myPage_btn").on("click", function(){
+			if(${not empty user_id}){
+				location="myPage";
+			}else{
+				if(confirm("로그인이 필요한 서비스입니다\n로그인창으로 이동하시겠습니까?")){
+					location="login";
+				}
+			}
+		});
 	});
 </script>
 </head>
@@ -43,7 +69,7 @@
 			<li><a href="main">메인</a></li>
 			<li><a href="board_rcp">거래</a></li>
 			<li><a href="board_comm">커뮤니티</a></li>
-			<li><a href="myPage">마이페이지</a></li>
+			<li><a href="#" id="myPage_btn">마이페이지</a></li>
 		</ul>
 	</div>
 	<div style="width: 50%; float: right">
@@ -57,5 +83,6 @@
 		</ul>
 	</div>
 </nav>
+<div class="container"></div>
 </body>
 </html>

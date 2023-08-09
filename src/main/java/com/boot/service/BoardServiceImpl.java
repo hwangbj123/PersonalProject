@@ -75,6 +75,14 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteBoard(int rcp_key) {
 		boardDAO.deleteBoard(rcp_key);
 	}
+	@Override
+	public void boardGoodUp(int rcp_key) {
+		boardDAO.boardGoodUp(rcp_key);
+	}
+	@Override
+	public void boardGoodDown(int rcp_key) {
+		boardDAO.boardGoodDown(rcp_key);
+	}
 }
 
 
